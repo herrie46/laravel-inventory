@@ -26,19 +26,22 @@ class LoginController extends Controller
     }
     public function authenticate(Request $request): RedirectResponse
     {
+        // var_dump($request->email);
+        // var_dump($request->password);
+        // die;
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
             return redirect()->intended('dashboard');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email atau password salah',
         ])->onlyInput('email');
     }
     // Dengan demikian, metode authenticate ini berfungsi untuk memvalidasi
