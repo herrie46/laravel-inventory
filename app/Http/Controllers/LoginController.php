@@ -48,4 +48,12 @@ class LoginController extends Controller
     // kredensial pengguna, mengautentikasi mereka, dan mengarahkan mereka ke
     // halaman yang sesuai tergantung pada hasil autentikasi. Jika autentikasi gagal
     // , pesan kesalahan akan ditampilkan kepada pengguna.
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
 }
