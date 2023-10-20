@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Herrie Effendi">
-    <title>Laravel Inventory By Herrie</title>
-    <style>
-    </style>
+    <title>Key Online Inventory</title>
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.2/css/bootstrap.min.css')}}">
   </head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
