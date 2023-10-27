@@ -42,6 +42,10 @@ Route::get('/master/barang',[MasterBarangController::class,'index'])
 ->name('master-barang')
 ->middleware('auth');
 
+Route::get('/master/barang/tambah',[MasterBarangController::class,'create'])
+->name('master-barang-tambah')
+->middleware('auth');
+
 Route::get('/master/kategori',[MasterKategoriController::class,'index'])
 ->name('master-kategori')
 ->middleware('auth');

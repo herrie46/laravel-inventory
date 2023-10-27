@@ -11,7 +11,7 @@
       <a class="nav-link {{(Request::segment(2)=='gudang')? 'active':''}}" href="{{route('master-gudang')}}">Gudang</a>
     </li>
   </ul>
-  <div class="tab-content pt-3">
+  <div class="tab-content p-4">
     @yield('master-konten')
   </div>
 @endsection
