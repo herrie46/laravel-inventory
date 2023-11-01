@@ -17,7 +17,7 @@ class MasterBarangController extends Controller
     public function index()
     {
         //proses ambil data dari mysql
-        $barang = MasterBarangModel::all();
+        $barang = MasterBarangModel::where('status',1)->get();
         return view('/master/barang/index',compact('barang'));
     }
 
@@ -92,8 +92,23 @@ class MasterBarangController extends Controller
     }
 
 
-    public function destroy(string $id)
+    public function destroy($id_barang)
     {
-        //
+        try {
+    $update = MasterBarangModel::
+    where(['id' =>$id_barang])
+    -> update([
+        'status' => 0,
+    ]);
+    //jika update berhasil
+    if ($update) {
+        return redirect()
+        ->route('master-barang')
+        ->with('success','Berhasil menghapus barang');
+    }}
+    catch (\Throwable $th) {
+        return redirect()
+        ->route ('master-barang')
+        ->with('danger',$th->getmessage());
     }
-}
+    }}
