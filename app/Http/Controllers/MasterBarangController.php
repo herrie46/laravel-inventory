@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MasterBarangModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -56,6 +57,8 @@ class MasterBarangController extends Controller
          'id_gudang'    => null,
          'dibuat_kapan' => date('Y-m-d H:i:s'),
          'dibuat_oleh'  => Auth::user()->id,
+         'diperbarui_kapan' => date('Y-m-d H:i:s'),
+         'diperbarui_oleh'  => Auth::user()->id,
         ]);
       //jika proses input ke mysql berhasil
       if($insert) {
@@ -76,7 +79,19 @@ class MasterBarangController extends Controller
 
     public function show(string $id)
     {
-        //
+        // $barang = MasterBarangModel::where(['id' => $id]) ->first();
+        $barang = DB::select (
+        "SELECT a.*,b.name as dibuat_nama,b.email as dibuat_email
+        ,c.name as diperbarui_nama,c.email as diperbarui_email
+        FROM
+        master_barang a
+        left join users b on b.id = a.dibuat_oleh
+        left join users c on c.id = a.diperbarui_oleh
+        where a.id =?;",
+        [$id]
+        );
+        // dd($barang);
+        return view('master/barang/detail',compact('barang'));
     }
 
 
