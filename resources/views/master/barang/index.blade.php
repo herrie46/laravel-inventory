@@ -33,6 +33,10 @@
                     class="btn bntn-sm btn-success rounded-circle">
                     <i class ="fa fa-solid fa-eye"> </i>
                 </a>
+                <a href="{{route('master-barang-edit',['id'=>$b->id])}}"
+                    class="btn bntn-sm btn-warning rounded-circle">
+                    <i class ="fa fa-solid fa-pencil"> </i>
+                </a>
                 <a href="{{route('master-barang-hapus',['id'=>$b->id])}}"
                     class="btn bntn-sm btn-danger rounded-circle"
                     onclick="return confirm('Apakah anda yakin ingin hapus {{$b->kode}} ?')">
