@@ -31,7 +31,7 @@ class MasterBarangController extends Controller
     public function store(Request $request)
     {
     $aturan =[
-        'html_kode' => 'required|min:3|max:7|alpha_dash',
+        'html_kode' => 'required|min:3|max:7|alpha_dash|unique:master_barang,kode',
         'html_nama' => 'required|min:10|max:25',
         'html_deskripsi' => 'required|max:255',
     ];
