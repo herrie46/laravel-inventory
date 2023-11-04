@@ -12,6 +12,11 @@
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-database"></i></i></div>
                 Master Data
             </a>
+            <a class="nav-link {{(Request::segment(1)=='master')?'active':''}}"
+            href="{{ url('/trashmaster')}}">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-trash"></i></i></div>
+                Trash Master Data
+            </a>
         </div>
     </div>
     <div class="sb-sidenav-footer">

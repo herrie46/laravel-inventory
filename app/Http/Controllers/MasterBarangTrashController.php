@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 
-class MasterBarangController extends Controller
+class MasterBarangTrashController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class MasterBarangController extends Controller
     public function index()
     {
         //proses ambil data dari mysql
-        $barang = MasterBarangModel::where('status',1)->get();
-        return view('/master/barang/index',compact('barang'));
+        $barang = MasterBarangModel::where('status',0)->get();
+        return view('/mastertrash/barang/index',compact('barang'));
         //proses ambil data dari mysql
     }
 
@@ -92,7 +92,7 @@ class MasterBarangController extends Controller
         [$id]
         );
         // dd($barang);
-        return view('master/barang/detail',compact('barang'));
+        return view('mastertrash/barang/detail',compact('barang'));
     }
 
 
@@ -114,45 +114,25 @@ class MasterBarangController extends Controller
     }
 
 
-    public function update(Request $request, string $id)
+    public function update($id_barang)
     {
-        $aturan =[
-            'html_nama' => 'required|min:10|max:25',
-            'html_deskripsi' => 'required|max:255',
-        ];
-        $pesan_indo = [
-            'required' =>'Wajib Diisi',
-            'min' =>'Minimal :min Karakter',
-            'max' =>'Maksimal :max Karakter',
-            'alpha_dash' =>'Wajib menggunakan huruf,angka dan underscore'
-        ];
-        $validator = Validator::make($request->all(),$aturan,$pesan_indo);
-        try{
-            if($validator->fails()) {
-                return redirect()
-                -> route('master-barang-edit',$id)
-                -> withErrors($validator)->withInput();
-            } else {
-          $update = MasterBarangModel::where(['id'=>$id])->Update([
-             'nama'         => $request->html_nama,
-             'deskripsi'    => $request->html_deskripsi,
-             'diperbarui_kapan' => date('Y-m-d H:i:s'),
-             'diperbarui_oleh'  => Auth::user()->id,
+        try {
+            $update = MasterBarangModel::
+            where(['id' =>$id_barang])
+            -> update([
+                'status' => 3,
             ]);
-          //jika proses update ke mysql berhasil
-          if($update) {
-            return redirect()
-            -> route('master-barang')
-            -> with('success','Berhasil memperbaharui barang!');
-                      }
-                    }
+            //jika update berhasil
+            if ($update) {
+                return redirect()
+                ->route('mastertrash-barang')
+                ->with('success','Berhasil menghapus barang');
+            }}
+            catch (\Throwable $th) {
+                return redirect()
+                ->route ('mastertrash-barang')
+                ->with('danger',$th->getmessage());
             }
-           catch (\Throwable $th) {
-            return redirect()
-            -> route('master-barang-edit',$id)
-            -> with('danger',$th->getMessage());
-           }
-
     }
 
 
@@ -162,17 +142,20 @@ class MasterBarangController extends Controller
     $update = MasterBarangModel::
     where(['id' =>$id_barang])
     -> update([
-        'status' => 0,
+        'status' => 1,
     ]);
     //jika update berhasil
     if ($update) {
         return redirect()
-        ->route('master-barang')
-        ->with('success','Berhasil menghapus barang');
+        ->route('mastertrash-barang')
+        ->with('success','Berhasil merestore barang');
     }}
     catch (\Throwable $th) {
         return redirect()
-        ->route ('master-barang')
+        ->route ('mastertrash-barang')
         ->with('danger',$th->getmessage());
     }
-    }}
+    }
+}
+
+

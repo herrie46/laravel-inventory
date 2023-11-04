@@ -1,10 +1,17 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\MasterBarangController;
 use App\Http\Controllers\MasterKategoriController;
 use App\Http\Controllers\MasterGudangController;
+
+use App\Http\Controllers\MasterTrashController;
+use App\Http\Controllers\MasterBarangTrashController;
+use App\Http\Controllers\MasterKategoriTrashController;
+use App\Http\Controllers\MasterGudangTrashController;
+
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,8 +45,16 @@ Route::get('/master',[MasterController::class,'index'])
 ->name('master')
 ->middleware('auth');
 
+Route::get('/trashmaster',[MasterTrashController::class,'index'])
+->name('master')
+->middleware('auth');
+
 Route::get('/master/barang',[MasterBarangController::class,'index'])
 ->name('master-barang')
+->middleware('auth');
+
+Route::get('/master/barangtrash',[MasterBarangTrashController::class,'index'])
+->name('mastertrash-barang')
 ->middleware('auth');
 
 Route::get('/master/barang/tambah',[MasterBarangController::class,'create'])
@@ -55,10 +70,22 @@ Route::get('/master/barang/hapus/{id}',[MasterBarangController::class,'destroy']
 ->where('id','[0-9]+')
 ->middleware('auth');
 
+Route::get('/mastertrash/barang/restore/{id}',[MasterBarangTrashController::class,'destroy'])
+->name('mastertrash-barang-restore')
+->where('id','[0-9]+')
+->middleware('auth');
+
+Route::get('/mastertrash/barang/hapus/{id}',[MasterBarangTrashController::class,'update'])
+->name('mastertrash-barang-hapus')
+->where('id','[0-9]+')
+->middleware('auth');
+
 Route::get('/master/barang/detail/{id}',[MasterBarangController::class,'show'])
 ->name('master-barang-detail')
 ->where('id','[0-9]+')
 ->middleware('auth');
+
+
 
 Route::get('/master/barang/edit/{id}',[MasterBarangController::class,'edit'])
 ->name('master-barang-edit')
@@ -76,4 +103,17 @@ Route::get('/master/kategori',[MasterKategoriController::class,'index'])
 
 Route::get('/master/gudang',[MasterGudangController::class,'index'])
 ->name('master-gudang')
+->middleware('auth');
+
+Route::get('/mastertrash/barang/detail/{id}',[MasterBarangTrashController::class,'show'])
+->name('mastertrash-barang-detail')
+->where('id','[0-9]+')
+->middleware('auth');
+
+Route::get('/mastertrash/kategori',[MasterKategoriTrashController::class,'index'])
+->name('mastertrash-kategori')
+->middleware('auth');
+
+Route::get('/mastertrash/gudang',[MasterGudangTrashController::class,'index'])
+->name('mastertrash-gudang')
 ->middleware('auth');

@@ -1,7 +1,7 @@
-@extends('master/all')
+@extends('mastertrash/all')
 @section('master-konten')
 
-<h3>Detail barang </h3>
+<h3>Detail barang yang dihapus</h3>
 @if (isset($barang[0]))
 @php
     $tanggal_dibuat = new Datetime($barang[0]->dibuat_kapan);
