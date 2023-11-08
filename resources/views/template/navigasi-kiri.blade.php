@@ -12,7 +12,11 @@
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-database"></i></i></div>
                 Master Data
             </a>
-            <a class="nav-link {{(Request::segment(1)=='master')?'active':''}}"
+            <a class="nav-link {{(Request::segment(1)=='stok-masuk')?'active':''}}"
+            href="{{ route('stok-masuk')}}">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></i></div>
+                Stok Masuk
+            <a class="nav-link {{(Request::segment(1)=='trashmaster')?'active':''}}"
             href="{{ url('/trashmaster')}}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-trash"></i></i></div>
                 Trash Master Data

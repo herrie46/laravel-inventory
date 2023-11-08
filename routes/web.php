@@ -12,6 +12,8 @@ use App\Http\Controllers\MasterBarangTrashController;
 use App\Http\Controllers\MasterKategoriTrashController;
 use App\Http\Controllers\MasterGudangTrashController;
 
+use App\Http\Controllers\StokController;
+
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -116,4 +118,8 @@ Route::get('/mastertrash/kategori',[MasterKategoriTrashController::class,'index'
 
 Route::get('/mastertrash/gudang',[MasterGudangTrashController::class,'index'])
 ->name('mastertrash-gudang')
+->middleware('auth');
+
+Route::get('/stok-masuk',[StokController::class,'form_stok_masuk'])
+->name('stok-masuk')
 ->middleware('auth');

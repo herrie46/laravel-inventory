@@ -37,6 +37,7 @@
                     class="btn bntn-sm btn-warning rounded-circle"
                     onclick="return confirm('Apakah anda yakin ingin restore {{$b->kode}} ?')">
                     <i class ="fa fa-solid fa-window-restore"> </i>
+                </a>
                 <a href="{{route('mastertrash-barang-hapus',['id'=>$b->id])}}"
                     class="btn bntn-sm btn-danger rounded-circle"
                     onclick="return confirm('Apakah anda yakin ingin menghapus {{$b->kode}} ?')">
