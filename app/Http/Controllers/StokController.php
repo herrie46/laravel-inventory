@@ -123,11 +123,13 @@ class StokController extends Controller
                             if ($request->form_jumlah_keluar > $stok_sisa) {
                                 return redirect()
                                     ->route('stok-keluar')
+                                    ->withInput()
                                     ->with('danger', 'Jumlah yang dikeluarkan melebihi stok yang ada');
                             } else {
                                 if ($request->form_jumlah_keluar <= 0) {
                                     return redirect()
                                         ->route('stok-keluar')
+                                        ->withInput()
                                         ->with('danger', 'Jumlah keluar tidak boleh lebih kecil sama dengan nol');
                                 } else {
                                     $keluar = $stok_sisa - $request->form_jumlah_keluar;
@@ -154,6 +156,7 @@ class StokController extends Controller
                 } catch (\Throwable $th) {
                     return redirect()
                         ->route('stok-keluar')
+                        ->withInput()
                         ->with('danger', $th->getMessage());
                 }
             }
