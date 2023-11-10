@@ -16,6 +16,10 @@
             href="{{ route('stok-masuk')}}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></i></div>
                 Stok Masuk
+            <a class="nav-link {{(Request::segment(1)=='stok-keluar')?'active':''}}"
+            href="{{ route('stok-keluar')}}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-dolly"></i></i></div>
+                Stok Keluar
             <a class="nav-link {{(Request::segment(1)=='trashmaster')?'active':''}}"
             href="{{ url('/trashmaster')}}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-trash"></i></i></div>

@@ -123,3 +123,15 @@ Route::get('/mastertrash/gudang',[MasterGudangTrashController::class,'index'])
 Route::get('/stok-masuk',[StokController::class,'form_stok_masuk'])
 ->name('stok-masuk')
 ->middleware('auth');
+
+Route::post('/stok-in',[StokController::class,'proses_stok_masuk'])
+->name('stok-in')
+->middleware('auth');
+
+Route::post('/stok-out',[StokController::class,'proses_stok_keluar'])
+->name('stok-out')
+->middleware('auth');
+
+Route::get('/stok-keluar',[StokController::class,'form_stok_keluar'])
+->name('stok-keluar')
+->middleware('auth');
